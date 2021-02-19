@@ -7,8 +7,14 @@ const index = require("./routes/index");
 
 const app = express();
 app.use(index);
+
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = require("socket.io")(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+    }
+});
 
 let interval;
 
